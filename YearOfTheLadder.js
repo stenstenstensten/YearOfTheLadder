@@ -72,7 +72,7 @@ function setup() {
     randomSeed(seed)
   }
   //testing with fixed random seed
-  randomSeed(20)
+  //randomSeed(20)
 
   regenerationInterval = 1 //20
 
