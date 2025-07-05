@@ -53,24 +53,34 @@ let maxInterval = 500 // Maximum interval towards the end
 let raritySelect
 
 function setup() {
-  //randomSeed(180)
+  //randomSeed(10)
   rectMode(CENTER)
   imageMode(CENTER)
   angleMode(RADIANS)
   textAlign(CENTER, CENTER)
   colorMode(HSB, 360, 100, 100, 255)
+  textFont('sans-serif')
+  createCanvas(720, 1200)
+  //createCanvas(1200, 500)
+
+  maxRegenerations = random(10, 20) //not fixed random
+
+  //fixing random at mint
+  if (typeof blockHash !== 'undefined') {
+    const seed = `${tokenId}${blockHash.slice(0, 10)}`
+    randomSeed(seed)
+  }
+  //testing with fixed random seed
+  //randomSeed(20)
 
   regenerationInterval = 1 //20
-  maxRegenerations = random(10, 20) //random(10, 70)
+
   numberInsets = random(0, 0.45)
 
-  textFont('sans-serif')
-  createCanvas(windowWidth, windowHeight)
   //createCanvas(1200, 1800)
   // createCanvas(950,1600)
   //createCanvas(1830,1030)
   raritySelect = random(1)
-  //raritySelect = 0.96
   colorShiftScale = random(1)
 
   //noLoop()
@@ -385,8 +395,8 @@ function setup() {
 
   //gameovre
   for (let i = 0; i < 22; i++) {
-    let dimA = random(0.1, 0.8)
-    let dimB = random(0.1, 0.9)
+    let dimA = random(0.1, 0.8) //not hl.
+    let dimB = random(0.1, 0.9) //not hl.
     gameOvreDimA.push(dimA)
     gameOvreDimB.push(dimB)
   }
@@ -394,6 +404,19 @@ function setup() {
   if (backgroundMaterial == 'back of the cloth') {
     ornamentTrait = 'CAD'
   } else ornamentTrait = Math.floor(numberInsets * 10) + 1
+
+  // Set traits ///the names can't be variables!!
+  let traits = {
+    'Drawing material': backgroundMaterial,
+    'Palette variation': traitColorValue,
+    'Hue seed': HueSeed,
+    'Ornament level': ornamentTrait,
+    'Snake count': numSnakes,
+    'Ladder count': numLadders,
+  }
+  //set traits
+  // hl.token.setTraits(traits)
+  // hl.token.setName(`Year of the Ladder #${hl.tx.tokenId}`)
 }
 
 function generateTiles() {
@@ -408,11 +431,11 @@ function generateTiles() {
 
     // Create a grid
     for (let j = 0; j < tileMinis * tileMinis; j++) {
-      let tileOnOff = random(tileDecaySpectrum) // Generate a random number on a new, decayed, very decayed spectrum
+      let tileOnOff = random(tileDecaySpectrum) // Generate a random number on a new, decayed, very decayed spectrum, //not hl.
       tiles.push(tileOnOff > 0.5) // Push true (on) if > 0.5, false (off) otherwise
     }
     for (let k = 0; k < tileMinisRight * tileMinisRight; k++) {
-      let tileOnOffR = random(tileDecaySpectrumRight) // Generate a random number on a new, decayed, very decayed spectrum
+      let tileOnOffR = random(tileDecaySpectrumRight) // Generate a random number on a new, decayed, very decayed spectrum, //not hl.
       tilesRight.push(tileOnOffR > 0.5) // Push true (on) if > 0.5, false (off) otherwise
     }
 
@@ -1062,6 +1085,8 @@ function draw() {
   if (cycleCount >= 0) {
     drawCycleProgress()
   }
+  //capture preview
+  // hl.token.capturePreview()
 
   if (cycleCount >= 1) {
     drawCycleProgress()
@@ -1538,6 +1563,8 @@ function draw() {
     drawLadders(boardColumns, boardRows)
     drawPlayer(boardColumns, boardRows)
   }
+  // fill(0,100,100,255)
+  // text(traitColorValue, width/4, height/2)
 }
 
 function stairsLeft(x, y, size) {
@@ -2371,23 +2398,23 @@ function panelSingle(x, y, w, h, greyScale) {
   rect(0, 0 - h / 2, w * 0.2, h * 0.2)
   pop()
 }
-
+///this function has hl.random instances throughout
 function initializeGridProportions() {
-  wallCols = Math.floor(random(1, 7))
-  wallRows = Math.floor(random(1, 7))
+  wallCols = Math.floor(random(1, 7)) //hl.
+  wallRows = Math.floor(random(1, 7)) //hl.
   colProportions = []
   rowProportions = []
   totalColProportion = 0
   totalRowProportion = 0
   // Initialize proportions for columns
   for (let i = 0; i < wallCols; i++) {
-    let colProportion = random(0.1, 0.3) // Relative proportions for each column
+    let colProportion = random(0.1, 0.3) // Relative proportions for each column //hl.
     colProportions.push(colProportion)
     totalColProportion += colProportion // Sum of proportions
   }
   // Initialize proportions for rows
   for (let j = 0; j < wallRows; j++) {
-    let rowProportion = random(0.1, 0.3) // Relative proportions for each row
+    let rowProportion = random(0.1, 0.3) // Relative proportions for each row //hl.
     rowProportions.push(rowProportion)
     totalRowProportion += rowProportion // Sum of proportions
   }
@@ -2398,6 +2425,7 @@ function eachPanel(w, h) {
   noStroke()
 }
 
+///this class has hl.random instances throughout, except for runRegeneration()
 class boardGrid {
   constructor(x, y) {
     this.x = x // X position of this grid
@@ -2405,11 +2433,11 @@ class boardGrid {
     this.isRegenerating = false // Track if this grid is regenerating
     this.currentCount = 0 // Counter for regenerations
     this.gridSize = gridWidth * 2
-    this.colorOffset = floor(random(0, colorVariableH.length))
+    this.colorOffset = floor(random(0, colorVariableH.length)) //hl.
 
     // Store unique grid properties
-    this.wallCols = Math.floor(random(1, 7))
-    this.wallRows = Math.floor(random(1, 7))
+    this.wallCols = Math.floor(random(1, 7)) //hl.
+    this.wallRows = Math.floor(random(1, 7)) //hl.
     this.colProportions = []
     this.rowProportions = []
     this.totalColProportion = 0
@@ -2420,17 +2448,17 @@ class boardGrid {
 
     // Generate random proportions
     for (let i = 0; i < this.wallCols; i++) {
-      this.colProportions.push(random(0.1, 1))
+      this.colProportions.push(random(0.1, 1)) //hl.
       this.totalColProportion += this.colProportions[i]
     }
     for (let j = 0; j < this.wallRows; j++) {
-      this.rowProportions.push(random(0.1, 1))
+      this.rowProportions.push(random(0.1, 1)) //hl.
       this.totalRowProportion += this.rowProportions[j]
     }
     for (let j = 0; j < 51; j++) {
-      this.colInset.push(random(0.1, 1))
-      this.rowInset.push(random(0.1, 1))
-      this.insetYesNo.push(random(1))
+      this.colInset.push(random(0.1, 1)) //hl.
+      this.rowInset.push(random(0.1, 1)) //hl.
+      this.insetYesNo.push(random(1)) //hl.
     }
   }
 
