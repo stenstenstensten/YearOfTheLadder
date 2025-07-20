@@ -60,9 +60,8 @@ function setup() {
   textAlign(CENTER, CENTER)
   colorMode(HSB, 360, 100, 100, 255)
   textFont('sans-serif')
-  //createCanvas(720, 1200)
-  createCanvas(976, 1642)
-  //createCanvas(1200, 500)
+  //createCanvas(976, 1642)
+  createCanvas(windowWidth, windowHeight)
 
   maxRegenerations = random(10, 20) //not fixed random
 
