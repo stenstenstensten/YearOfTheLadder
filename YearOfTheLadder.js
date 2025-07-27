@@ -61,7 +61,8 @@ function setup() {
   colorMode(HSB, 360, 100, 100, 255)
   textFont('sans-serif')
   //createCanvas(976, 1642)
-  createCanvas(windowWidth, windowHeight)
+  createCanvas(659,1100)
+  //createCanvas(windowWidth, windowHeight)
 
   maxRegenerations = random(10, 20) //not fixed random
 
