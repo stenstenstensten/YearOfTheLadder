@@ -63,7 +63,7 @@ function setup() {
   //createCanvas(976, 1642) //phone res
   //createCanvas(659,1100)
   //createCanvas(497,830)
-  createCanvas(windowWidth, windowHeight)
+  createCanvas(windowHeight*0.5945, windowHeight)
 
   maxRegenerations = random(10, 20) //not fixed random
 
