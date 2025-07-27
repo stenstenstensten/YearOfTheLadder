@@ -4,7 +4,6 @@ html, body {
   background: #575757; /* or your preferred background */
   display: flex;
     justify-content: center;
-  align-items: center;
 }
 
 canvas {
