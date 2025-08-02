@@ -429,7 +429,7 @@ function generateTiles() {
   groupOfTiles = []
   groupOfTilesRight = []
 
-  numberOfTiles = ((width / (height / 2 / 10)) * height) / 20
+  numberOfTiles = ((width / (height / 20)) * height) / 5
   // Create unique grids
   for (let i = 0; i < numberOfTiles; i++) {
     let tiles = [] // Create a new array for each grid
@@ -469,7 +469,7 @@ function generateUnits() {
   leftCanvasX = width / 2 - mainCanvasWidth / 2 - sideCanvasWidth / 2
   rightCanvasX = width / 2 + mainCanvasWidth / 2 + sideCanvasWidth / 2
 
-  gridWidth = height / 2 / 10
+  gridWidth = height / 20
   crossUnit = unit * 0.9
   gapFillWidth =
     sideCanvasWidth - Math.floor(sideCanvasWidth / gridWidth) * gridWidth
