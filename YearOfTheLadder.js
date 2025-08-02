@@ -1,8 +1,4 @@
-// const MATERIAL_PROFILES = {
-//   blueprint: {
 
-//   }
-// }
 
 //globals
 let gridArray = [-4.5, -3.5, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5, 3.5, 4.5]
@@ -52,6 +48,7 @@ let baseInterval = 10 // Minimum interval for regeneration
 let maxInterval = 500 // Maximum interval towards the end
 let raritySelect
 
+
 function setup() {
   //randomSeed(10)
   rectMode(CENTER)
@@ -60,10 +57,15 @@ function setup() {
   textAlign(CENTER, CENTER)
   colorMode(HSB, 360, 100, 100, 255)
   textFont('sans-serif')
-  //createCanvas(976, 1642) //phone res
-  //createCanvas(659,1100)
-  //createCanvas(497,830)
-  createCanvas(windowHeight*0.5945, windowHeight)
+
+  createCanvas(windowHeight*0.594, windowHeight)
+
+  //createCanvas(976, 1642) //this is phone res
+//createCanvas(659,1100)//laptop res
+ 
+  //createCanvas(1480, 850)
+
+  //createCanvas(900, 1200)
 
   maxRegenerations = random(10, 20) //not fixed random
 
@@ -73,7 +75,7 @@ function setup() {
     randomSeed(seed)
   }
   //testing with fixed random seed
-  //randomSeed(20)
+  //randomSeed(8)
 
   regenerationInterval = 1 //20
 
@@ -106,27 +108,11 @@ function setup() {
     backgroundMaterial = 'back of the cloth'
   }
 
-  //generate tiles setup
-  //generate tiles
-  tileMinis = Math.floor(random(3, 6))
-  tileMinisRight = Math.floor(random(3, 6))
-  tileDecaySpectrum = random(0.49, 3)
-  tileDecaySpectrumRight = random(0.49, 3)
-  tileDesignProportionA = random(0, 0.7)
-  tileDesignProportionB = random(0, 0.2)
-  tileSizeInsetLeft = random(0.5, 0.8)
-  tileSizeInsetRight = random(0.5, 0.8)
-
-  //generate units and tiles
-  generateTiles()
-  generateUnits()
-  updateGameOvrePath()
-
   colorVariableH = []
   colorVariableS = []
   colorVariableB = []
 
-  ////COLORS
+    ////COLORS
   monoColor = Math.floor(random(0, 360))
   if (backgroundMaterial == 'blueprint') {
     backgroundColor = [18, 3, 15, 255]
@@ -330,17 +316,18 @@ function setup() {
     }
   }
 
-  background(backgroundColor)
+  //generate tiles setup
+  //generate tiles
+  tileMinis = Math.floor(random(3, 6))
+  tileMinisRight = Math.floor(random(3, 6))
+  tileDecaySpectrum = random(0.49, 3)
+  tileDecaySpectrumRight = random(0.49, 3)
+  tileDesignProportionA = random(0, 0.7)
+  tileDesignProportionB = random(0, 0.2)
+  tileSizeInsetLeft = random(0.5, 0.8)
+  tileSizeInsetRight = random(0.5, 0.8)
 
-  // Generate 60 unique instances
-  for (let i = 0; i < 60; i++) {
-    let grid = new boardGrid(0, 0)
-    boardGrids.push(grid)
-  }
-
-  tileColorOffset = floor(random(0, colorVariableH.length))
-
-  //generate pieces
+    //generate pieces
   // Generate 12 unique tile grids
   for (let i = 0; i < numPieces; i++) {
     let piecesMinis = Math.floor(random(3, 6))
@@ -355,6 +342,23 @@ function setup() {
     gamePiecesTiles.push(pieces)
     gamePiecesMinis.push(piecesMinis)
   }
+
+  //generate units and tiles
+  generateTiles()
+  generateUnits()
+  updateGameOvrePath()
+
+  background(backgroundColor)
+
+  // Generate 60 unique instances
+  for (let i = 0; i < 60; i++) {
+    let grid = new boardGrid(0, 0)
+    boardGrids.push(grid)
+  }
+
+  tileColorOffset = floor(random(0, colorVariableH.length))
+
+
 
   //the below is a fix for snake heads / ladder bottoms not doubling up
   let numSnakes = floor(random(3, 8))
@@ -2401,26 +2405,26 @@ function panelSingle(x, y, w, h, greyScale) {
   pop()
 }
 ///this function has hl.random instances throughout
-function initializeGridProportions() {
-  wallCols = Math.floor(random(1, 7)) //hl.
-  wallRows = Math.floor(random(1, 7)) //hl.
-  colProportions = []
-  rowProportions = []
-  totalColProportion = 0
-  totalRowProportion = 0
-  // Initialize proportions for columns
-  for (let i = 0; i < wallCols; i++) {
-    let colProportion = random(0.1, 0.3) // Relative proportions for each column //hl.
-    colProportions.push(colProportion)
-    totalColProportion += colProportion // Sum of proportions
-  }
-  // Initialize proportions for rows
-  for (let j = 0; j < wallRows; j++) {
-    let rowProportion = random(0.1, 0.3) // Relative proportions for each row //hl.
-    rowProportions.push(rowProportion)
-    totalRowProportion += rowProportion // Sum of proportions
-  }
-}
+// function initializeGridProportions() {
+//   wallCols = Math.floor(random(1, 7)) //hl.
+//   wallRows = Math.floor(random(1, 7)) //hl.
+//   colProportions = []
+//   rowProportions = []
+//   totalColProportion = 0
+//   totalRowProportion = 0
+//   // Initialize proportions for columns
+//   for (let i = 0; i < wallCols; i++) {
+//     let colProportion = random(0.1, 0.3) // Relative proportions for each column //hl.
+//     colProportions.push(colProportion)
+//     totalColProportion += colProportion // Sum of proportions
+//   }
+//   // Initialize proportions for rows
+//   for (let j = 0; j < wallRows; j++) {
+//     let rowProportion = random(0.1, 0.3) // Relative proportions for each row //hl.
+//     rowProportions.push(rowProportion)
+//     totalRowProportion += rowProportion // Sum of proportions
+//   }
+// }
 
 function eachPanel(w, h) {
   rect(0, 0, w, h) // Draw each individual panel
@@ -2437,7 +2441,7 @@ class boardGrid {
     this.gridSize = gridWidth * 2
     this.colorOffset = floor(random(0, colorVariableH.length)) //hl.
 
-    // Store unique grid properties
+    // Store unique grid properties 
     this.wallCols = Math.floor(random(1, 7)) //hl.
     this.wallRows = Math.floor(random(1, 7)) //hl.
     this.colProportions = []
