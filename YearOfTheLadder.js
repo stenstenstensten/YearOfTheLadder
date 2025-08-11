@@ -58,7 +58,7 @@ function setup() {
   colorMode(HSB, 360, 100, 100, 255)
   textFont('sans-serif')
 
-  createCanvas(windowHeight*0.594, windowHeight)
+  createCanvas(windowWidth, windowHeight)
 
   //createCanvas(976, 1642) //this is phone res
 //createCanvas(659,1100)//laptop res
